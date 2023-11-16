@@ -52,3 +52,10 @@ app.delete("/todo/delete/:id", async (req, res) => {
     console.log(error.message);
   }
 });
+
+app.put("/todo/editComplete/:id", async (req, res) => {
+  const todo = await Todo.findById(req.params.id);
+  todo.complete = !todo.complete;
+  await todo.save();
+  res.json(todo);
+});

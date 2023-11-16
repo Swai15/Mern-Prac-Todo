@@ -1,0 +1,17 @@
+GET http://localhost:5001/todos
+
+###
+
+POST http://localhost:5001/todo/create
+Content-Type: application/json
+
+{
+  "text": "Mandazi"
+}
+
+###
+DELETE http://localhost:5001/todos/delete-all 
+
+
+###
+DELETE http://localhost:5001/todo/delete/6555c6cf447b889efb5de45c

@@ -19,10 +19,28 @@ function App() {
       .catch((error) => console.error("Error: " + error.message));
   };
 
-  const deleteTodo = (id) => {
-    fetch(API_BASE + "/todo/delete/" + id, { method: "delete" })
+  const completeTodo = (id) => {
+    fetch(API_BASE + "/todo/editComplete/" + id, { method: "PUT" })
       .then((res) => res.json())
-      .then(setTodos((todos) => todos.filter((todo) => todo._id != id)))
+
+      .then((data) => {
+        console.log(data);
+        setTodos((todos) => {
+          return todos.map((todo) => {
+            if (todo._id === id) {
+              todo.complete = data.complete;
+              console.log("Working");
+            }
+            return todo;
+          });
+        });
+      });
+  };
+
+  const deleteTodo = (id) => {
+    fetch(API_BASE + "/todo/delete/" + id, { method: "DELETE" })
+      .then((res) => res.json())
+      .then(setTodos((todos) => todos.filter((todo) => todo._id !== id)))
       .catch((error) => console.log("Error: " + error.message));
   };
 
@@ -36,8 +54,10 @@ function App() {
           {todos.map((todo) => {
             return (
               <div className="todo" key={todo._id}>
-                <div className="checkbox">0</div>
-                <div className="todo-text">{todo.text}</div>
+                <div className="checkbox" onClick={() => completeTodo(todo._id)}>
+                  0
+                </div>
+                <div className={"todo-text " + (todo.complete ? "completed" : "")}>{todo.text}</div>
                 <div className="delete-todo" onClick={() => deleteTodo(todo._id)}>
                   x
                 </div>

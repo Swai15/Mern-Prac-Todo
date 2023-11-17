@@ -50,3 +50,7 @@ body {
 .delete-todo {
   cursor: pointer;
 }
+
+.completed {
+  text-decoration: line-through;
+}

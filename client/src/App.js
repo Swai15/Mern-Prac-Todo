@@ -19,6 +19,13 @@ function App() {
       .catch((error) => console.error("Error: " + error.message));
   };
 
+  const deleteTodo = (id) => {
+    fetch(API_BASE + "/todo/delete/" + id, { method: "delete" })
+      .then((res) => res.json())
+      .then(setTodos((todos) => todos.filter((todo) => todo._id != id)))
+      .catch((error) => console.log("Error: " + error.message));
+  };
+
   return (
     <div className="App">
       <div className="tasks-container">
@@ -31,7 +38,9 @@ function App() {
               <div className="todo" key={todo._id}>
                 <div className="checkbox">0</div>
                 <div className="todo-text">{todo.text}</div>
-                <div className="delete-todo">x</div>
+                <div className="delete-todo" onClick={() => deleteTodo(todo._id)}>
+                  x
+                </div>
               </div>
             );
           })}

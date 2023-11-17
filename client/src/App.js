@@ -3,6 +3,7 @@ const API_BASE = "http://localhost:5001";
 
 function App() {
   const [todos, setTodos] = useState([]);
+  const [newTodo, setNewTodo] = useState("");
 
   useEffect(() => {
     getTodos();
@@ -21,13 +22,15 @@ function App() {
   return (
     <div className="App">
       <div className="tasks-container">
-        <div className="heading">Todo List</div>
+        <div className="heading">
+          <h2>Todo List</h2>
+        </div>
         <div className="tasks-body">
           {todos.map((todo) => {
             return (
-              <div className="todo">
-                <div className="checkbox"></div>
-                <div className="text">{todo.text}</div>
+              <div className="todo" key={todo._id}>
+                <div className="checkbox">0</div>
+                <div className="todo-text">{todo.text}</div>
                 <div className="delete-todo">x</div>
               </div>
             );

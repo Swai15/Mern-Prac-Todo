@@ -4,6 +4,7 @@ const API_BASE = "http://localhost:5001";
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
+  const [createActive, setCreateActive] = useState(false);
 
   useEffect(() => {
     getTodos();
@@ -66,6 +67,20 @@ function App() {
           })}
         </div>
       </div>
+
+      <div className="open-popup" onClick={() => setCreateActive(true)}>
+        <p>+</p>
+      </div>
+
+      {createActive ? (
+        <div className="create-task">
+          <div className="close-popup" onClick={() => setCreateActive(false)}>
+            x
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

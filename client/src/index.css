@@ -54,3 +54,33 @@ body {
 .completed {
   text-decoration: line-through;
 }
+
+.open-popup {
+  position: fixed;
+  cursor: pointer;
+  bottom: 10%;
+  right: 10%;
+  width: 5px;
+  height: 5px;
+  font-size: 40px;
+  background-color: rgb(67, 32, 99);
+  padding: 20px;
+  border-radius: 100%;
+  box-shadow: 0px 3px 24px var(--dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.open-popup:hover {
+  padding: 21px;
+  background-color: rgb(87, 41, 131);
+
+}
+
+.close-popup {
+  cursor: pointer;
+  margin-left: 15px;
+  font-size: 16px;
+}

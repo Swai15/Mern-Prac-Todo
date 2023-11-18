@@ -101,19 +101,21 @@ function App() {
       </div>
 
       {createActive ? (
-        <div className="modal-popup">
-          <div className="create-task">
-            <div className="popup-header">
-              <div className="close-popup" onClick={() => setCreateActive(false)}>
-                x
+        <div className="modal-background">
+          <div className="modal-popup">
+            <div className="create-task">
+              <div className="popup-header">
+                <div className="close-popup" onClick={() => setCreateActive(false)}>
+                  x
+                </div>
+                <h3>Add Task</h3>
               </div>
-              <h3>Add Task</h3>
-            </div>
-            <div className="popup-body">
-              <input type="text" className="add-todo" onChange={handleChange} value={newTodo} />
-              {newTodo}
-              <div className="button" onClick={addTodo}>
-                Create
+              <div className="popup-body">
+                <input type="text" className="add-todo" onChange={handleChange} value={newTodo} />
+                {newTodo}
+                <div className="button" onClick={addTodo}>
+                  Create
+                </div>
               </div>
             </div>
           </div>

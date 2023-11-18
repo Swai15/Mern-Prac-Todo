@@ -45,6 +45,34 @@ function App() {
       .catch((error) => console.log("Error: " + error.message));
   };
 
+  const handleChange = (e) => {
+    console.log("Value: ", e.target.value);
+    setNewTodo(e.target.value);
+  };
+
+  const addTodo = async () => {
+    try {
+      const response = await fetch(API_BASE + "/todo/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: newTodo,
+        }),
+      });
+
+      const data = await response.json();
+      setTodos([...todos, data]);
+      setCreateActive(false);
+      setNewTodo(" ");
+    } catch (error) {
+      console.error("Error creating todo:", error);
+    }
+  };
+
+  //Separation
+
   return (
     <div className="App">
       <div className="tasks-container">
@@ -73,9 +101,21 @@ function App() {
       </div>
 
       {createActive ? (
-        <div className="create-task">
-          <div className="close-popup" onClick={() => setCreateActive(false)}>
-            x
+        <div className="modal-popup">
+          <div className="create-task">
+            <div className="popup-header">
+              <div className="close-popup" onClick={() => setCreateActive(false)}>
+                x
+              </div>
+              <h3>Add Task</h3>
+            </div>
+            <div className="popup-body">
+              <input type="text" className="add-todo" onChange={handleChange} value={newTodo} />
+              {newTodo}
+              <div className="button" onClick={addTodo}>
+                Create
+              </div>
+            </div>
           </div>
         </div>
       ) : (
